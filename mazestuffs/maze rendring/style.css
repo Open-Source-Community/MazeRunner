@@ -1,0 +1,30 @@
+.body
+{
+	overflow: hidden;
+}
+.codePlace {
+	z-index: 100;
+	position: fixed;
+	right: 0px;
+	top: 0px; 
+	bottom: 0px;
+}
+
+.myCode {
+	width: 684px;
+	height: 98%;
+	font-size: 20px!important;
+}
+
+.myLanguage {
+	margin-top: 10px;
+	color: black;
+	font-weight: bold;
+}
+.submit
+{
+	bottom: 0; 
+	right: 0; 
+	position: fixed; 
+	z-index: 500; 
+}
