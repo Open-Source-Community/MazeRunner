@@ -2,9 +2,8 @@
 var toty;
 var maze_text; 
 var blocks_array; 
-
 var maze_array ;  
-
+var end_pos; 
 function setup()
 {
   maze_array= new Array(10);
@@ -16,7 +15,7 @@ function setup()
   var cnv = createCanvas(windowWidth,windowHeight);
   var scale=3.7,stepwidth=1,stephight=1,blocksize=16;  
   maze_text = readTextFile("output.txt");
-  drawmaze(maze_text,scale,stepwidth,stephight,2); // removed the random, add a set 0 value to the draw maze late.
+  end_pos = drawmaze(maze_text,scale,stepwidth,stephight,2); // removed the random, add a set 0 value to the draw maze late.
   console.log(maze_array); 
   toty=new movs(scale,stephight,stepwidth,blocksize); 
 }
@@ -233,10 +232,14 @@ class movs
   }
   GameWin()
   {
-    if (maze_array[this.x_maze][this.y_maze] == 'o')
+    if (toty.tank.reachedPoint(end_pos.x , end_pos.y)==true)
     {
       fill(120,0,0); 
-      text("WELL PLAYED GOOD GAME, your score is " + this.v_step_list.length + "!" , width/2 , height/2 , 200 , 200); 
+      textSize(40); 
+      var str = this.v_step_list.length;
+      str.toString(); 
+      // str =  "WELL PLAYED GOOD GAME, your score is " + str;
+      text( "this is your score " + this.v_step_list.length  , 50 , height-160, 200 , 200); 
     }
   }
 }
@@ -258,6 +261,7 @@ function drawmaze(maze,scale,stepwidth,stephight,mazenumber)
   var rownumber=mazenumber*11;
   var row_end=rownumber+10;
   var row_temp = 0; 
+  var end_pos = createVector(); 
   //row loop
   for(var row=rownumber;row<row_end;row++)
   {
@@ -282,13 +286,18 @@ function drawmaze(maze,scale,stepwidth,stephight,mazenumber)
         for(var inblock_row=0;inblock_row<stephight;inblock_row++)
         {
           xpos=currentX; // 1st 16  .. 
+          if (currnt_element=='o')
+          {
+            end_pos.x = xpos; 
+            end_pos.y = ypos
+          }
           for(var inblock_colomn=0;inblock_colomn<stepwidth;inblock_colomn++)
           {
            Markbrick=new StartEnd(xpos,ypos,scale);
            Markbrick.drawbrick();
            xpos+=blocksize;
           }  
-
+          
           if (inblock_row +1>= stephight)
           {
             continue; 
@@ -358,6 +367,7 @@ function drawmaze(maze,scale,stepwidth,stephight,mazenumber)
     xpos=blocksize/2;
     ypos+=blocksize*(stephight);
   }   
+  return end_pos; 
 }
 
 function findelement(_1d,num_O_colomns,row,colomn)
