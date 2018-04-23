@@ -235,7 +235,7 @@ class movs
     if (toty.tank.reachedPoint(end_pos.x , end_pos.y)==true)
     {
       fill(120,0,0); 
-      textSize(40); 
+      textSize(50); 
       var str = this.v_step_list.length;
       str.toString(); 
       // str =  "WELL PLAYED GOOD GAME, your score is " + str;
