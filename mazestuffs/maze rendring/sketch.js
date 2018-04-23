@@ -16,7 +16,7 @@ function setup()
   var cnv = createCanvas(windowWidth,windowHeight);
   var scale=3.7,stepwidth=1,stephight=1,blocksize=16;  
   maze_text = readTextFile("output.txt");
-  drawmaze(maze_text,scale,stepwidth,stephight,0); // removed the random, add a set 0 value to the draw maze late.
+  drawmaze(maze_text,scale,stepwidth,stephight,2); // removed the random, add a set 0 value to the draw maze late.
   console.log(maze_array); 
   toty=new movs(scale,stephight,stepwidth,blocksize); 
 }
@@ -58,6 +58,7 @@ function draw()
       noLoop();
     }
   }
+  toty.GameWin(); 
  
  
 }
@@ -230,6 +231,14 @@ class movs
     }
     return false; 
   }
+  GameWin()
+  {
+    if (maze_array[this.x_maze][this.y_maze] == 'o')
+    {
+      fill(120,0,0); 
+      text("WELL PLAYED GOOD GAME, your score is " + this.v_step_list.length + "!" , width/2 , height/2 , 200 , 200); 
+    }
+  }
 }
 
 
@@ -248,6 +257,7 @@ function drawmaze(maze,scale,stepwidth,stephight,mazenumber)
   var brick,currnt_element;
   var rownumber=mazenumber*11;
   var row_end=rownumber+10;
+  var row_temp = 0; 
   //row loop
   for(var row=rownumber;row<row_end;row++)
   {
@@ -257,9 +267,11 @@ function drawmaze(maze,scale,stepwidth,stephight,mazenumber)
       //charecter for this row in the array
       currnt_element = findelement(maze,11,row,colomn);
 
-      if (colomn<10 && row<10)
-        maze_array[row][colomn] = currnt_element; 
-      
+      if (colomn<10 && row_temp<10)
+      {
+        maze_array[row_temp][colomn] = currnt_element; 
+         
+      }
       var currentX=xpos,currentY=ypos;
         
       
@@ -342,6 +354,7 @@ function drawmaze(maze,scale,stepwidth,stephight,mazenumber)
      
       //xpos+=blocksize/4;// remove this line to remove the spaces between each step 
     }
+    row_temp++; 
     xpos=blocksize/2;
     ypos+=blocksize*(stephight);
   }   
