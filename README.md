@@ -16,3 +16,30 @@ of the tank there is a block then the function will return true.
 - Use recursive algorithms to solve any maze using the isBlock function to create a generic algorithm, be creative.
 
 - If you solved it try forking this repo and adding a screenshot of your submission code in the submission folder and pull request it, best answers shall be displayed.
+
+
+## Code example
+
+- This code is not generic, it just solves the first maze, you can copy and run it to test how the tank moves.
+
+``` javascript 
+var d = function(a)
+{
+    toty.movdown();
+}
+var r = function(a)
+{
+    toty.movright();
+}
+
+var a =[6,6,1,1,1,2,1];
+var b=[d,r,d,r,d,r,d];
+
+for (var i=0; i<7; i++)
+{
+    for (var j=0; j<a[i]; j++)
+    {
+        b[i](2); 
+    }
+}
+```
