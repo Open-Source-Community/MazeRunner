@@ -230,6 +230,38 @@ class movs
     }
     return false; 
   }
+  isWin(check)
+  {
+    if (check=='right')
+    {
+      if  (this.x_maze+1>9 || maze_array[this.y_maze][this.x_maze+1]=='o')
+      {
+        return true; 
+      }
+    }
+    if (check=='left')
+    {
+      if (this.x_maze-1<0 ||maze_array[this.y_maze][this.x_maze-1]=='o')
+      {
+        return true; 
+      }
+    }
+    if (check=='up')
+    {
+      if (this.y_maze-1<0 || maze_array[this.y_maze-1][this.x_maze]=='o')
+      {
+        return true; 
+      }
+    }
+    if (check=='down')
+    {
+      if (this.y_maze+1>9 || maze_array[this.y_maze+1][this.x_maze]=='o')
+      {
+        return true; 
+      }
+    }
+    return false; 
+  }
   GameWin()
   {
     if (toty.tank.reachedPoint(end_pos.x , end_pos.y)==true)
